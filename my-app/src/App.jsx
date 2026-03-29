@@ -38,22 +38,15 @@ const projects = [
 
 const featuredProjects = projects.slice(0, 2)
 
-const services = [
-  'Environment kits and modular set pieces',
-  'Props, furniture, weapons, and scene dressing',
-  'Stylized Roblox-ready optimization and cleanup',
-  'Blockout-to-final workflow for game production',
-]
-
 const highlights = [
   { value: '[00+]', label: 'Completed assets or scenes' },
   { value: '[00]', label: 'Active game collaborations' },
   { value: '[X years]', label: 'Building for Roblox worlds' },
 ]
 
-const quickLinks = [
+const navLinks = [
+  { to: '/', label: 'Home' },
   { to: '/projects', label: 'Projects' },
-  { to: '/services', label: 'Services' },
 ]
 
 function SectionIntro({ eyebrow, title, text }) {
@@ -68,7 +61,7 @@ function SectionIntro({ eyebrow, title, text }) {
 
 function ProjectCard({ project }) {
   return (
-    <article className="panel project-card" key={project.slug}>
+    <article className="panel project-card">
       <div className="image-placeholder project-image">[ADD PROJECT IMAGE]</div>
       <div className="project-card-body">
         <p className="project-type">{project.type}</p>
@@ -84,24 +77,50 @@ function ProjectCard({ project }) {
   )
 }
 
+function SiteHeader() {
+  return (
+    <header className="topbar">
+      <NavLink className="brand" to="/">
+        <span className="brand-kicker">Portfolio</span>
+        <span className="brand-name">[MODELER NAME]</span>
+      </NavLink>
+
+      <nav className="topnav" aria-label="Primary">
+        {navLinks.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            end={link.to === '/'}
+            className={({ isActive }) =>
+              isActive ? 'nav-link nav-link-active' : 'nav-link'
+            }
+          >
+            {link.label}
+          </NavLink>
+        ))}
+      </nav>
+
+      <p className="nav-note">Roblox 3D Modeler</p>
+    </header>
+  )
+}
+
 function HomePage() {
   return (
     <section className="route-page hero-page">
       <div className="hero-grid">
         <div className="hero-copy">
-          <p className="eyebrow">Available for commissions and studio work</p>
-          <h1>Stylized Roblox 3D work with a cleaner, production-first pipeline.</h1>
+          <p className="eyebrow">Featured work for studios and commissions</p>
+          <h1>Clean homepage, focused highlights, and a direct path into the full portfolio.</h1>
           <p className="section-copy">
-            Replace this intro with a short pitch about your friend, the game types
-            he works on, and the look he is known for delivering.
+            This homepage now keeps the message tighter: a short intro, a few key
+            stats, and two featured projects before sending visitors to the full
+            projects page.
           </p>
 
           <div className="cta-row">
-            <a className="primary-button" href="mailto:[EMAIL ADDRESS]">
-              Book a project
-            </a>
-            <NavLink className="secondary-button" to="/projects">
-              See all projects
+            <NavLink className="primary-button" to="/projects">
+              View projects
             </NavLink>
           </div>
 
@@ -143,12 +162,9 @@ function HomePage() {
 
       <div className="home-section-header">
         <div>
-          <p className="eyebrow">Featured projects</p>
-          <h2>Show a few of the strongest builds here, then push visitors into the full projects page.</h2>
+          <p className="eyebrow">Selected projects</p>
+          <h2>Two featured pieces on the homepage, with the rest moved into a dedicated projects page.</h2>
         </div>
-        <NavLink className="secondary-button" to="/projects">
-          See all projects
-        </NavLink>
       </div>
 
       <div className="project-grid home-project-grid">
@@ -157,17 +173,9 @@ function HomePage() {
         ))}
       </div>
 
-      <div className="panel projects-cta-panel">
-        <div>
-          <span className="panel-label">Full archive</span>
-          <h2>Need to see everything?</h2>
-          <p className="section-copy">
-            Use the separate projects page for the full grid, future case studies,
-            and any deeper before-and-after breakdowns.
-          </p>
-        </div>
-        <NavLink className="primary-button" to="/projects">
-          Open all projects
+      <div className="see-all-wrap">
+        <NavLink className="primary-button see-all-button" to="/projects">
+          See all projects
         </NavLink>
       </div>
     </section>
@@ -178,9 +186,9 @@ function ProjectsPage() {
   return (
     <section className="route-page">
       <SectionIntro
-        eyebrow="All projects"
-        title="A dedicated projects page keeps the homepage cleaner while still giving people the full portfolio."
-        text="Keep the homepage curated. Put the wider body of work here, and later expand these cards into proper case studies when you have final renders and real production notes."
+        eyebrow="Projects"
+        title="The full project grid lives here, separate from the homepage."
+        text="This route keeps the homepage curated while still giving visitors a complete portfolio page with every project card in one place."
       />
 
       <div className="project-grid">
@@ -192,69 +200,15 @@ function ProjectsPage() {
   )
 }
 
-function ServicesPage() {
-  return (
-    <section className="route-page">
-      <SectionIntro
-        eyebrow="Services"
-        title="Production-ready asset support for Roblox teams that need clean handoff and consistent style."
-        text="The design is flatter and darker now, with less visual noise. This route can be expanded with pricing or package breakdowns later without touching the other pages."
-      />
-
-      <div className="two-column-layout">
-        <div className="panel section-panel">
-          <ul className="service-list">
-            {services.map((service) => (
-              <li key={service}>{service}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="panel quote-panel">
-          <span className="panel-label">Client quote</span>
-          <blockquote>
-            “Add a short testimonial here about communication, speed, polish,
-            or how the assets improved the game.”
-          </blockquote>
-          <p>[CLIENT NAME / STUDIO NAME]</p>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function App() {
   return (
     <div className="app-shell">
-      <header className="topbar">
-        <NavLink className="brand" to="/">
-          <span className="brand-mark">XYAZ</span>
-          <span className="brand-copy">
-            <strong>[MODELER NAME]</strong>
-            <span>Roblox 3D Modeler</span>
-          </span>
-        </NavLink>
-
-        <nav className="topnav" aria-label="Primary">
-          {quickLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) =>
-                isActive ? 'nav-link nav-link-active' : 'nav-link'
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main className="site-main">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/services" element={<ServicesPage />} />
         </Routes>
       </main>
     </div>
