@@ -1,9 +1,10 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
 import './App.css'
 
-const featuredProjects = [
+const projects = [
   {
     title: '[PROJECT NAME 01]',
+    slug: 'project-01',
     type: 'Stylized city hub for a Roblox RPG',
     summary:
       'Use this card to explain the world theme, what was built, and where the final scene helped the game stand out.',
@@ -11,6 +12,7 @@ const featuredProjects = [
   },
   {
     title: '[PROJECT NAME 02]',
+    slug: 'project-02',
     type: 'Sci-fi prop set for a Roblox simulator',
     summary:
       'Replace this with a short case study about the asset style, performance target, and how the pack supported gameplay.',
@@ -18,14 +20,23 @@ const featuredProjects = [
   },
   {
     title: '[PROJECT NAME 03]',
+    slug: 'project-03',
     type: 'Fantasy interior kit for a showcase world',
     summary:
       'Use this space for a concise challenge and result summary with a final render or in-engine screenshot.',
     deliverables: ['[ADD FINAL RENDER]', '[ADD ROLE]', '[ADD RELEASE DATE]'],
   },
+  {
+    title: '[PROJECT NAME 04]',
+    slug: 'project-04',
+    type: 'Vehicle set for a fast-paced Roblox experience',
+    summary:
+      'Drop in a short breakdown of the vehicle style, technical limits, and what made the final assets feel polished in-game.',
+    deliverables: ['[ADD TURNAROUND]', '[ADD TEXTURE PASS]', '[ADD DELIVERY DATE]'],
+  },
 ]
 
-const homeProjects = featuredProjects.slice(0, 2)
+const featuredProjects = projects.slice(0, 2)
 
 const services = [
   'Environment kits and modular set pieces',
@@ -41,7 +52,7 @@ const highlights = [
 ]
 
 const quickLinks = [
-  { to: '/work', label: 'Work' },
+  { to: '/projects', label: 'Projects' },
   { to: '/services', label: 'Services' },
 ]
 
@@ -52,6 +63,24 @@ function SectionIntro({ eyebrow, title, text }) {
       <h1>{title}</h1>
       <p className="section-copy">{text}</p>
     </div>
+  )
+}
+
+function ProjectCard({ project }) {
+  return (
+    <article className="panel project-card" key={project.slug}>
+      <div className="image-placeholder project-image">[ADD PROJECT IMAGE]</div>
+      <div className="project-card-body">
+        <p className="project-type">{project.type}</p>
+        <h2>{project.title}</h2>
+        <p className="section-copy">{project.summary}</p>
+        <ul className="tag-row" aria-label={`${project.title} details`}>
+          {project.deliverables.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </article>
   )
 }
 
@@ -71,8 +100,8 @@ function HomePage() {
             <a className="primary-button" href="mailto:[EMAIL ADDRESS]">
               Book a project
             </a>
-            <NavLink className="secondary-button" to="/work">
-              View portfolio
+            <NavLink className="secondary-button" to="/projects">
+              See all projects
             </NavLink>
           </div>
 
@@ -114,55 +143,49 @@ function HomePage() {
 
       <div className="home-section-header">
         <div>
-          <p className="eyebrow">Project preview</p>
-          <h2>A couple of projects up front, with the full portfolio on its own page.</h2>
+          <p className="eyebrow">Featured projects</p>
+          <h2>Show a few of the strongest builds here, then push visitors into the full projects page.</h2>
         </div>
-        <NavLink className="secondary-button" to="/work">
+        <NavLink className="secondary-button" to="/projects">
           See all projects
         </NavLink>
       </div>
 
       <div className="project-grid home-project-grid">
-        {homeProjects.map((project) => (
-          <article className="panel project-card" key={project.title}>
-            <div className="image-placeholder project-image">[ADD PROJECT IMAGE]</div>
-            <p className="project-type">{project.type}</p>
-            <h2>{project.title}</h2>
-            <p className="section-copy">{project.summary}</p>
-            <ul className="tag-row" aria-label={`${project.title} details`}>
-              {project.deliverables.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
+        {featuredProjects.map((project) => (
+          <ProjectCard project={project} key={project.slug} />
         ))}
+      </div>
+
+      <div className="panel projects-cta-panel">
+        <div>
+          <span className="panel-label">Full archive</span>
+          <h2>Need to see everything?</h2>
+          <p className="section-copy">
+            Use the separate projects page for the full grid, future case studies,
+            and any deeper before-and-after breakdowns.
+          </p>
+        </div>
+        <NavLink className="primary-button" to="/projects">
+          Open all projects
+        </NavLink>
       </div>
     </section>
   )
 }
 
-function WorkPage() {
+function ProjectsPage() {
   return (
     <section className="route-page">
       <SectionIntro
-        eyebrow="Selected work"
-        title="Separate project pages can come later. This route sets up the portfolio section properly."
-        text="Each navbar item now opens a real route instead of jumping down the page. This page can grow into individual case studies when you have final images and real project copy."
+        eyebrow="All projects"
+        title="A dedicated projects page keeps the homepage cleaner while still giving people the full portfolio."
+        text="Keep the homepage curated. Put the wider body of work here, and later expand these cards into proper case studies when you have final renders and real production notes."
       />
 
       <div className="project-grid">
-        {featuredProjects.map((project) => (
-          <article className="panel project-card" key={project.title}>
-            <div className="image-placeholder project-image">[ADD PROJECT IMAGE]</div>
-            <p className="project-type">{project.type}</p>
-            <h2>{project.title}</h2>
-            <p className="section-copy">{project.summary}</p>
-            <ul className="tag-row" aria-label={`${project.title} details`}>
-              {project.deliverables.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
+        {projects.map((project) => (
+          <ProjectCard project={project} key={project.slug} />
         ))}
       </div>
     </section>
@@ -230,7 +253,7 @@ function App() {
       <main className="site-main">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/work" element={<WorkPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/services" element={<ServicesPage />} />
         </Routes>
       </main>
