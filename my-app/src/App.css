@@ -120,6 +120,14 @@
   grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
 }
 
+.home-section-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 3rem 0 1.25rem;
+}
+
 .hero-copy {
   padding: 34px 0 10px;
 }
@@ -300,6 +308,10 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.home-project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .project-image {
   min-height: 14rem;
   margin-bottom: 1rem;
@@ -414,6 +426,11 @@
   .stat-grid,
   .hero-mini-grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-section-header {
+    align-items: start;
+    flex-direction: column;
   }
 }
 

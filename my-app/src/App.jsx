@@ -25,6 +25,8 @@ const featuredProjects = [
   },
 ]
 
+const homeProjects = featuredProjects.slice(0, 2)
+
 const services = [
   'Environment kits and modular set pieces',
   'Props, furniture, weapons, and scene dressing',
@@ -108,6 +110,32 @@ function HomePage() {
             </div>
           </div>
         </aside>
+      </div>
+
+      <div className="home-section-header">
+        <div>
+          <p className="eyebrow">Project preview</p>
+          <h2>A couple of projects up front, with the full portfolio on its own page.</h2>
+        </div>
+        <NavLink className="secondary-button" to="/work">
+          See all projects
+        </NavLink>
+      </div>
+
+      <div className="project-grid home-project-grid">
+        {homeProjects.map((project) => (
+          <article className="panel project-card" key={project.title}>
+            <div className="image-placeholder project-image">[ADD PROJECT IMAGE]</div>
+            <p className="project-type">{project.type}</p>
+            <h2>{project.title}</h2>
+            <p className="section-copy">{project.summary}</p>
+            <ul className="tag-row" aria-label={`${project.title} details`}>
+              {project.deliverables.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
       </div>
     </section>
   )
