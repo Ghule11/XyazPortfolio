@@ -32,24 +32,6 @@ const services = [
   'Blockout-to-final workflow for game production',
 ]
 
-const workflow = [
-  {
-    step: '01',
-    title: 'Brief and references',
-    text: 'Add how project goals, style targets, and gameplay constraints are locked before production starts.',
-  },
-  {
-    step: '02',
-    title: 'Blockout and iteration',
-    text: 'Show how rough forms, scale checks, and screenshots are reviewed before the final polish pass.',
-  },
-  {
-    step: '03',
-    title: 'Final polish',
-    text: 'Add the delivery stage: cleanup, optimization, export setup, and final handoff to the team.',
-  },
-]
-
 const highlights = [
   { value: '[00+]', label: 'Completed assets or scenes' },
   { value: '[00]', label: 'Active game collaborations' },
@@ -59,8 +41,6 @@ const highlights = [
 const quickLinks = [
   { to: '/work', label: 'Work' },
   { to: '/services', label: 'Services' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
 ]
 
 function SectionIntro({ eyebrow, title, text }) {
@@ -86,9 +66,9 @@ function HomePage() {
           </p>
 
           <div className="cta-row">
-            <NavLink className="primary-button" to="/contact">
+            <a className="primary-button" href="mailto:[EMAIL ADDRESS]">
               Book a project
-            </NavLink>
+            </a>
             <NavLink className="secondary-button" to="/work">
               View portfolio
             </NavLink>
@@ -121,6 +101,10 @@ function HomePage() {
             <div className="panel compact-card">
               <span className="panel-label">Location</span>
               <strong>[CITY / COUNTRY]</strong>
+            </div>
+            <div className="panel compact-card">
+              <span className="panel-label">Contact</span>
+              <strong>[EMAIL / DISCORD]</strong>
             </div>
           </div>
         </aside>
@@ -188,68 +172,6 @@ function ServicesPage() {
   )
 }
 
-function AboutPage() {
-  return (
-    <section className="route-page">
-      <SectionIntro
-        eyebrow="About"
-        title="A dedicated page reads better than burying the background section under the hero."
-        text="Use this page for software, workflow, experience, preferred project types, and a tighter explanation of what kind of Roblox modeling work gets delivered."
-      />
-
-      <div className="two-column-layout">
-        <div className="panel section-panel">
-          <p className="section-copy">
-            [ABOUT PLACEHOLDER] Add the actual background story here: when he started
-            modeling, what tools he uses, what kind of teams he works with, and what
-            makes the work reliable in production.
-          </p>
-        </div>
-
-        <div className="workflow-grid">
-          {workflow.map((item) => (
-            <article className="panel workflow-card" key={item.step}>
-              <span className="workflow-step">{item.step}</span>
-              <h2>{item.title}</h2>
-              <p className="section-copy">{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ContactPage() {
-  return (
-    <section className="route-page">
-      <SectionIntro
-        eyebrow="Contact"
-        title="Use this route for the real booking path instead of a footer jump."
-        text="The page is intentionally simple. It keeps the contact details visible without piling on extra decoration."
-      />
-
-      <div className="two-column-layout">
-        <div className="panel section-panel">
-          <p className="section-copy">
-            Replace these placeholders with Discord, email, portfolio links, Roblox
-            profile, and preferred commission details.
-          </p>
-        </div>
-
-        <div className="panel contact-card">
-          <p>[EMAIL ADDRESS]</p>
-          <p>[DISCORD USERNAME]</p>
-          <p>[ROBLOX PROFILE LINK]</p>
-          <a className="primary-button full-width" href="mailto:[EMAIL ADDRESS]">
-            Replace with real email link
-          </a>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function App() {
   return (
     <div className="app-shell">
@@ -282,8 +204,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<WorkPage />} />
           <Route path="/services" element={<ServicesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>
     </div>
